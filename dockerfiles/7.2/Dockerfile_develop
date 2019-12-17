@@ -29,7 +29,7 @@ RUN echo "Installing Development Dpendencies \n" &&\
     rm -rf /var/cache/apk/*
 
 # I make seperate layer because Entrypoint is most likely to change
-COPY ../../entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY .../entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     chown root:root /usr/local/bin/entrypoint.sh &&\
