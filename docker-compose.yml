@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/7.2/Dockerfile_develop
+    links:
+      - base72
     image: etable/php7.2-dev
     volumes:
       - "./www:/var/www/html"

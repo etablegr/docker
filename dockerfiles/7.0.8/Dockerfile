@@ -56,11 +56,6 @@ RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-m
     && rm /tmp/memcached.tar.gz \
     && docker-php-ext-enable memcached
 
-RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
-    chown root:root /usr/local/bin/entrypoint.sh &&\
-    chmod +x /usr/local/bin/entrypoint.sh &&\
-    usermod --shell /bin/bash www-data
-
 WORKDIR /var/www
 
 ENTRYPOINT php-fpm

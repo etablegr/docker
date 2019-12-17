@@ -1,3 +1,5 @@
+version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -7,7 +9,7 @@ phases:
      - docker login -u $USER -p $TOKEN
   build:
     commands:
-     - docker-compose build --no-cache --force-rm
+     - docker-compose build
   post_build:
     commands:
       - docker-compose up -d
