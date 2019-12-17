@@ -1,0 +1,15 @@
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+   commands:
+     - docker login -u $USER -p $TOKEN
+  build:
+    commands:
+     - docker-compose build --no-cache --force-rm
+  post_build:
+    commands:
+      - docker-compose up -d
+      - docker push etable/php7.2
+      - docker push etable/php7.2-dev

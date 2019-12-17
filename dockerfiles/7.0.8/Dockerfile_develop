@@ -1,0 +1,39 @@
+FROM etable/php7.0.8
+
+LABEL "com.example.vendor"="etable.gr"
+LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"
+
+ENV DOCKER_UID=1000 \
+    DOCKER_GID=1000 \
+    XDEBUG_CONF_FILE=${PHP_CONF_DIR}/docker-php-ext-xdebug.ini \
+    XDEBUG_HOST="" \
+    XDEBUG_IDE_KEY="" \
+    XDEBUG_PORT=9000 \
+    XDEBUG_DBGP=FALSE
+
+
+RUN echo "Installing Development Dpendencies \n" &&\
+    echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories &&\
+    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\
+    apk add --update bash shadow git bash-completion bash-doc &&\
+    echo "Installing xdebug" &&\
+    pecl install xdebug  &&\
+    docker-php-ext-enable xdebug &&\
+    echo "Configuring Xdebug \n" &&\
+    echo "xdebug.remote_enable=1" >> ${XDEBUG_CONF_FILE} &&\
+    echo "xdebug.max_nesting_level = 1000" >> ${XDEBUG_CONF_FILE} &&\
+    echo "xdebug.remote_mode=req" >> ${XDEBUG_CONF_FILE} &&\
+    echo "xdebug.remote_log=xdebug.log" >> ${XDEBUG_CONF_FILE} &&\
+    cp ${XDEBUG_CONF_FILE} ${XDEBUG_CONF_FILE}.orig &&\
+    apk del build-dependencies &&\
+    rm -rf /var/cache/apk/*
+
+# I make seperate layer because Entrypoint is most likely to change
+COPY ./entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
+    chown root:root /usr/local/bin/entrypoint.sh &&\
+    chmod +x /usr/local/bin/entrypoint.sh &&\
+    usermod --shell /bin/bash www-data
+
+ENTRYPOINT /usr/local/bin/entrypoint.sh php-fpm

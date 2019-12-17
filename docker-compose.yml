@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  base:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile
+    image: etable/php7.2
+    stdin_open: true
+    tty: true
+
+  develop:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile_develop
+    image: etable/php7.2-dev
+    volumes:
+      - "./www:/var/www/html"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 7880:7880
+    links:
+      - "develop:develop"
+    volumes:
+      - "./www:/var/www/html"
+      - "./dist/nginx.conf:/etc/nginx/nginx.conf:ro"
