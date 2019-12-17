@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/7.2/Dockerfile
-    image: etable/php7.2
+    image: etable/php7.2:$VERSION_PHP_72
     stdin_open: true
     tty: true
 
@@ -15,7 +15,7 @@ services:
       dockerfile: ./dockerfiles/7.2/Dockerfile_develop
     links:
       - base72
-    image: etable/php7.2-dev
+    image: etable/php7.2-dev:$VERSION_PHP_72
     volumes:
       - "./www:/var/www/html"
   
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/7.0.8/Dockerfile
-    image: etable/php7.0.8
+    image: etable/php7.0.8:$VERSION_PHP_708
     volumes:
       - "./www:/var/www/html"
 
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/7.0.8/Dockerfile_develop
-    image: etable/php7.0.8-dev
+    image: etable/php7.0.8-dev:$VERSION_PHP_708
     volumes:
       - "./www:/var/www/html"
 
