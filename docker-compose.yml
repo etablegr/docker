@@ -24,8 +24,8 @@ services:
       context: .
       dockerfile: ./dockerfiles/7.0.8/Dockerfile
     image: etable/php7.0.8
-    stdin_open: true
-    tty: true
+    volumes:
+      - "./www:/var/www/html"
 
   develop708:
     build:

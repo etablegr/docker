@@ -4,6 +4,8 @@ FROM php:7.0.8-fpm
 MAINTAINER supergramm/phpfpm7
 MAINTAINER Desyllas Dimitrios <d.desyllas@e-table.gr><pcmagas@disroot.org>
 
+ENV PHP_INI="/usr/local/etc/php/php.ini"
+
 RUN echo "Europe/Athens" > /etc/timezone \
  && dpkg-reconfigure -f noninteractive tzdata
 
@@ -55,6 +57,17 @@ RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-m
     && rm -r memcached \
     && rm /tmp/memcached.tar.gz \
     && docker-php-ext-enable memcached
+
+RUN echo "Configure php-ini" \
+    && echo "date.timezone = Europe/Athens" >> $PHP_INI \
+    && echo "expose_php = Off" >> $PHP_INI \
+    && echo "log_errors = On" >> $PHP_INI \
+    && echo "error_reporting = E_ALL" >> $PHP_INI \
+    && echo "max_execution_time = 300" >> ${PHP_INI} \    
+    && echo "max_input_vars = 3000" >> ${PHP_INI} \
+    && echo "request_terminate_timeout = 300" >> ${PHP_INI} \
+    && echo "upload_max_filesize = 32M/" >> $PHP_INI \
+    && echo "post_max_size=32M" >> ${PHP_INI}
 
 WORKDIR /var/www
 
