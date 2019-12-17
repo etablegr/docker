@@ -9,7 +9,7 @@ phases:
      - docker login -u $USER -p $TOKEN
   build:
     commands:
-     - docker-compose build --force-rm
+     - docker-compose build
   post_build:
     commands:
       - docker-compose up -d
