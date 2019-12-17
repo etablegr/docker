@@ -80,7 +80,7 @@ RUN echo "Installing composer \n" &&\
     rm -rf /tmp/cpmposer-setup.php &&\
     chmod +x /bin/composer
 
-COPY ./entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ../entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     chown root:root /usr/local/bin/entrypoint.sh &&\
