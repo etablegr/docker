@@ -13,6 +13,10 @@ phases:
   post_build:
     commands:
       - docker-compose up -d
+      - docker commit $(docker-compose ps -q base708) etable/php7.0.8:latest
+      - docker commit $(docker-compose ps -q develop708) etable/php7.0.8-dev:latest
+      - docker commit $(docker-compose ps -q base72) etable/php7.2:latest
+      - docker commit $(docker-compose ps -q develop72) etable/php7.2-dev:latest
       - docker push etable/php7.2
       - docker push etable/php7.2-dev
       - docker push etable/php7.0.8
