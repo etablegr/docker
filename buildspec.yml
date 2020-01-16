@@ -1,5 +1,10 @@
 version: 0.2
 
+env:
+  variables: 
+    VERSION_PHP_72: 202012161534
+    VERSION_PHP_708: 202012161534
+
 phases:
   install:
     runtime-versions:
@@ -9,14 +14,12 @@ phases:
      - docker login -u $USER -p $TOKEN
   build:
     commands:
-     - docker-compose build
+     - docker-compose build -f ./dockerfiles/7.0.8/Dockerfile -t etable/php7.0.8:${VERSION_PHP_708} -t etable/php7.0.8:latest
+     - docker-compose build -f ./dockerfiles/7.0.8/Dockerfile_develop -t etable/php7.0.8-dev:${VERSION_PHP_708} -t etable/php7.0.8-dev:latest
+     - docker-compose build -f ./dockerfiles/7.2/Dockerfile -t etable/php7.0.8:${VERSION_PHP_72} -t etable/php7.0.8:latest
+     - docker-compose build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.0.8-dev:${VERSION_PHP_72} -t etable/php7.0.8-dev:latest 
   post_build:
     commands:
-      - docker-compose up -d
-      - docker commit $(docker-compose ps -q base708) etable/php7.0.8:latest
-      - docker commit $(docker-compose ps -q develop708) etable/php7.0.8-dev:latest
-      - docker commit $(docker-compose ps -q base72) etable/php7.2:latest
-      - docker commit $(docker-compose ps -q develop72) etable/php7.2-dev:latest
       - docker push etable/php7.2
       - docker push etable/php7.2-dev
       - docker push etable/php7.0.8
