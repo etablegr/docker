@@ -1,6 +1,6 @@
-# Etable php docker images
+# Etable PHP docker images
 
-Etable phph images used for http://etable.gr application build pipelines and launching the website.
+PHP images used for http://www.e-table.gr application build pipelines and launching the website.
 
 ## Xdebug Settings:
 The xdebug is configured via the following enviromental variables:
