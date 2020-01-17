@@ -77,8 +77,8 @@ RUN echo "Configure php-ini" \
     && echo "post_max_size=32M" >> ${PHP_INI}
 
 RUN echo "Installing xdebug" &&\
-    pecl install xdebug  &&\
-    docker-php-ext-enable xdebug &&\
+    pecl -d php_suffix=7.0.8 install xdebug  &&\
+    docker-php-ext-enable xdebug-2.5 &&\
     echo "Configuring Xdebug \n" &&\
     echo "xdebug.remote_enable=1" >> ${XDEBUG_CONF_FILE} &&\
     echo "xdebug.max_nesting_level = 1000" >> ${XDEBUG_CONF_FILE} &&\
