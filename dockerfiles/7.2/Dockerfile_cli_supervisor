@@ -28,7 +28,8 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     apk del build-dependencies &&\
     echo "Configuring php" &&\
     touch ${PHP_SETTINGS} &&\
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* &&\
+    mkdir -p /var/www/html
 
 # For faster Re-Builds
 
@@ -62,6 +63,6 @@ VOLUME /etc/supervisor/conf.d
 VOLUME /var/log/supervisor
 
 COPY ./dist/supervisor.conf /etc/supervisor/supervisor.conf
-VOLUME /var/run/supervisor.sock
+EXPOSE 9001
 
-ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
+ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisor.conf"]

@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  supervisor:
+    build:
+      context: .
+      dockerfile: dockerfiles/7.2/Dockerfile_cli_supervisor
+    image: etable/php7.2-supervisor:dev
+    ports:
+      - "9002:9001"
+    volumes:
+      - "./www:/var/www/html"
+      - "./dist/supervisor_dummy_service.conf:/etc/supervisor/conf.d/supervisor_dummy_service.conf:ro"
+      - "./volumes/supervisor/logs:/var/log/supervisor"

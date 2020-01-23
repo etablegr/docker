@@ -13,9 +13,11 @@ phases:
     #  - docker build -f ./dockerfiles/7.0.8/Dockerfile_develop -t etable/php7.0.8-dev:$(cat VERSION_PHP_708) -t etable/php7.0.8-dev:latest .
      - docker build -f ./dockerfiles/7.2/Dockerfile -t etable/php7.2:$(cat VERSION_PHP_72) -t etable/php7.2:latest .
      - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_708) -t etable/php7.2-dev:latest .
+     - docker build --no-cache --force-rm -f dockerfiles/7.2/Dockerfile_cli_supervisor -t etable/php7.2-supervisor:latest -t etable/php7.2-supervisor:$(cat PHP_SUPERVISOR)   .
   post_build:
     commands:
       - docker push etable/php7.2
       - docker push etable/php7.2-dev
       - docker push etable/php7.0.8
+      - docker push etable/php7.2_supervisor
       # - docker push etable/php7.0.8-dev
