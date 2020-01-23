@@ -63,6 +63,5 @@ VOLUME /etc/supervisor/conf.d
 VOLUME /var/log/supervisor
 
 COPY ./dist/supervisor.conf /etc/supervisor/supervisor.conf
-EXPOSE 9001
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisor.conf"]
