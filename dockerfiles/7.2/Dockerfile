@@ -49,5 +49,3 @@ RUN echo "Installing composer \n" &&\
     php /tmp/composer-setup.php --install-dir=/bin --filename=composer &&\
     rm -rf /tmp/cpmposer-setup.php &&\
     chmod +x /bin/composer
-
-ENTRYPOINT ["php-fpm"]

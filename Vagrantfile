@@ -13,8 +13,9 @@ Vagrant.configure("2") do |config|
         vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
     end
 
-    config.vm.network "private_network", ip: "192.168.10.111"
+    config.vm.network "private_network", ip: "192.168.10.150"
     config.vm.network "forwarded_port", guest: 22, host: 3223
+
 
     config.vm.synced_folder "./.", "/home/vagrant/code"
 
