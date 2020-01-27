@@ -1,4 +1,6 @@
-FROM php:7.2-alpine
+# Kept fro reference not used in production
+# @todo Use a base php image having common dependencies with php-fpm one.
+FROM php:7.2-fpm-alpine
 
 LABEL "com.example.vendor"="etable.gr"
 LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"
@@ -7,8 +9,17 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
     PHP_SETTINGS="$PHP_INI_DIR/php.ini"\
     FPM_CONF_DIR="/usr/local/etc/php-fpm.d"
 
+COPY ./dist/supervisor.conf /etc/supervisor/supervisor.conf
+
 RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev &&\
-    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\    
+    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\
+    echo "Build Supervisor" &&\
+    apk add --update python py-pip &&\
+    pip install supervisor &&\
+    mkdir -p /etc/supervisor/conf.d &&\
+    mkdir -p /var/log/supervisor &&\
+    chmod +wr-x /var/log/supervisor &&\
+    echo "Install php dependencies" &&\
     docker-php-ext-install bcmath &&\
     docker-php-ext-install opcache && \
     docker-php-ext-install pdo pdo_pgsql pgsql && \
@@ -30,6 +41,7 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     touch ${PHP_SETTINGS} &&\
     rm -rf /var/cache/apk/* &&\
     mkdir -p /var/www/html
+   
 
 # For faster Re-Builds
 
@@ -51,17 +63,7 @@ RUN echo "Installing composer \n" &&\
     rm -rf /tmp/cpmposer-setup.php &&\
     chmod +x /bin/composer
 
-
-RUN echo "Build Supervisor" &&\
-    apk add --update python py-pip &&\
-    pip install supervisor &&\
-    mkdir -p /etc/supervisor/conf.d &&\
-    mkdir -p /var/log/supervisor &&\
-    chmod +wr-x /var/log/supervisor
-
 VOLUME /etc/supervisor/conf.d
 VOLUME /var/log/supervisor
-
-COPY ./dist/supervisor.conf /etc/supervisor/supervisor.conf
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisor.conf"]

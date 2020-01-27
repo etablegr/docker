@@ -50,4 +50,4 @@ RUN echo "Installing composer \n" &&\
     rm -rf /tmp/cpmposer-setup.php &&\
     chmod +x /bin/composer
 
-ENTRYPOINT /bin/sh
+ENTRYPOINT ["php-fpm"]
