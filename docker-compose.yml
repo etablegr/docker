@@ -1,0 +1,53 @@
+# Used for local testing and development
+version: "3.7"
+
+services:
+  # @todo look a better and refined approach for supervisor images.
+  # supervisor:
+  #   build:
+  #     context: .
+  #     dockerfile: dockerfiles/7.2/Dockerfile_cli_supervisor
+  #   image: etable/php7.2-supervisor
+  #   volumes:
+  #     - "./www:/var/www/html"
+  #     - "./dist/supervisor_dummy_service.conf:/etc/supervisor/conf.d/supervisor_dummy_service.conf:ro"
+  #     - "./volumes/supervisor/logs:/var/log/supervisor"
+
+  # @todo look a better and refined approach for supervisor images.
+  # supervisor_dev:
+  #   build:
+  #     context: .
+  #     dockerfile: dockerfiles/7.2/Dockerfile_cli_supervisor
+  #   image: etable/php7.2-supervisor-develop
+  #   volumes:
+  #     - "./www:/var/www/html"
+  #     - "./dist/supervisor_dummy_service.conf:/etc/supervisor/conf.d/supervisor_dummy_service.conf:ro"
+  #     - "./volumes/supervisor/logs:/var/log/supervisor"
+
+  php72:
+    build:
+      context: .
+      dockerfile: dockerfiles/7.2/Dockerfile
+    image: etable/php7.2
+    volumes: 
+      - "./www:/var/www/html"
+  
+  php72dev:
+    build:
+      context: .
+      dockerfile: dockerfiles/7.2/Dockerfile_develop
+    image: etable/php7.2-dev
+    volumes: 
+      - "./www:/var/www/html"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '7880:7880'
+      - '7881:7881'
+    links:
+      - php72
+      - php72dev
+    volumes:
+      - "./dist/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./www:/var/www/html"

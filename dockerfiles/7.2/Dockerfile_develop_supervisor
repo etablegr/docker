@@ -1,4 +1,6 @@
-FROM etable/php7.2
+# Keeping for future reference
+# @todo Generate a common dockerfile using build arguments for development
+FROM ddesyllas/php-supervisor
 
 LABEL "com.example.vendor"="etable.gr"
 LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"
@@ -37,4 +39,4 @@ RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     usermod --shell /bin/bash www-data
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisor.conf"]
