@@ -1,6 +1,14 @@
 # Etable PHP docker images
 
-PHP images used for http://www.e-table.gr application build pipelines and infrastructure. 
+Docker images used for http://www.e-table.gr application build pipelines and infrastructure. 
+
+# Docker images:
+
+* `etable/php7.2`: Php version 7.2 with all all php dependencies installed.
+* `etable/php7.2-dev`: An `etable/php7.2` image with the Xdebug installed
+* `etable/php7.0.8`: Php version 7.0.8 with all all php dependencies installed, used in codeingiter projects.
+* `etable/php7.0.8-dev` : Php version 7.0.8 with xdebug installed
+* `etable/node`: Nodejs with gulp for building the frontend assets
 
 ## Xdebug Settings:
 The xdebug is configured via the following enviromental variables:
