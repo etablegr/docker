@@ -4,7 +4,8 @@ FROM php:7.0.8-fpm
 MAINTAINER supergramm/phpfpm7
 MAINTAINER Desyllas Dimitrios <d.desyllas@e-table.gr><pcmagas@disroot.org>
 
-ENV PHP_INI="/usr/local/etc/php/php.ini"
+ENV PHP_INI="/usr/local/etc/php/php.ini" \
+    FPM_CONF="/usr/local/etc/php-fpm.d/www.conf"
 
 RUN echo "Europe/Athens" > /etc/timezone \
  && dpkg-reconfigure -f noninteractive tzdata
@@ -67,7 +68,8 @@ RUN echo "Configure php-ini" \
     && echo "max_input_vars = 3000" >> ${PHP_INI} \
     && echo "request_terminate_timeout = 300" >> ${PHP_INI} \
     && echo "upload_max_filesize = 32M/" >> $PHP_INI \
-    && echo "post_max_size=32M" >> ${PHP_INI}
+    && echo "post_max_size=32M" >> ${PHP_INI} \
+    && sed -i "s/pm.max_children = .*/pm.max_children = 100/" $FPM_CONF
 
 WORKDIR /var/www
 
