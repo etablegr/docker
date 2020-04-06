@@ -50,20 +50,3 @@ Version File | images
 VERSION_NODEJS | `etable/node`
 VERSION_PHP_72 | `etable/php7.2` , `etable/php7.2-dev`
 VERSION_PHP_708 | `etable/php7.0.8`
-
-To revert run the following commands:
-
-```
-git checkout develop
-
-# List tags by date
-git for-each-ref --sort=taggerdate --format '%(refname) %(taggerdate)' refs/tags
-
-# revert the branch with the tag name
-git revert -m 1 ^tag_name^
-
-VERSION=$(date +"%Y%m%d%H%M%S");
-
-git flow release start $VERSION
-git flow release finish $VERSION
-```
