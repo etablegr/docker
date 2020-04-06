@@ -1,6 +1,6 @@
 # Etable PHP docker images
 
-Docker images used for http://www.e-table.gr application build pipelines and infrastructure. 
+Docker images used for http://www.e-table.gr application build pipelines and infrastructure.
 
 # Docker images:
 
@@ -9,6 +9,8 @@ Docker images used for http://www.e-table.gr application build pipelines and inf
 * `etable/php7.0.8`: Php version 7.0.8 with all all php dependencies installed, used in codeingiter projects.
 * `etable/php7.0.8-dev` : Php version 7.0.8 with xdebug installed
 * `etable/node`: Nodejs with gulp for building the frontend assets
+
+| `etable/php7.0.8-dev` is not being developped firther due to failue of the XDEBUG to install. It is being kept as legacy form.
 
 ## Xdebug Settings:
 The xdebug is configured via the following enviromental variables:
@@ -26,3 +28,25 @@ Variable | Description
 --- | ---
 `USER` | The Docker Hub user.
 `TOKEN` | The Docker Hub personal token.
+
+# Maintainer notes
+
+1. Use git-flow
+2. For release run the following commands
+   ```
+      VERSION=$(date +"%Y%m%d%H%M%S");
+      git flow release start $VERSION
+   
+      # Look on documentation bellow for ^VERSION_FILE^ 
+      echo $VERSION > ^VERSION_FILE^
+      git commit -am "Version Bump"
+      git flow release finish $VERSION
+   ````
+The ^VERSION_FILE^ is a file that records the version for each container for the correct file consult the table bellow:
+
+Version File | images
+--- | ---
+
+VERSION_NODEJS | `etable/node`
+VERSION_PHP_72 | `etable/php7.2` , `etable/php7.2-dev`
+VERSION_PHP_708 | `etable/php7.0.8`
