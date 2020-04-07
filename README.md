@@ -35,11 +35,10 @@ Variable | Description
 2. For release run the following commands
    ```
       VERSION=$(date +"%Y%m%d%H%M%S");
-      git flow release start $VERSION
-   
       # Look on documentation bellow for ^VERSION_FILE^ 
       echo $VERSION > ^VERSION_FILE^
-      git commit -am "Version Bump"
+
+      git flow release start $VERSION
       git flow release finish $VERSION
    ````
 The ^VERSION_FILE^ is a file that records the version for each container for the correct file consult the table bellow:
