@@ -7,10 +7,8 @@ Docker images used for http://www.e-table.gr application build pipelines and inf
 * `etable/php7.2`: Php version 7.2 with all all php dependencies installed.
 * `etable/php7.2-dev`: An `etable/php7.2` image with the Xdebug installed
 * `etable/php7.0.8`: Php version 7.0.8 with all all php dependencies installed, used in codeingiter projects.
-* `etable/php7.0.8-dev` : Php version 7.0.8 with xdebug installed
+* `etable/php7.0.8-dev` : Php version 7.0.8 used for development.
 * `etable/node`: Nodejs with gulp for building the frontend assets
-
-| `etable/php7.0.8-dev` is not being developped firther due to failue of the XDEBUG to install. It is being kept as legacy form.
 
 ## Xdebug Settings:
 The xdebug is configured via the following enviromental variables:
@@ -49,3 +47,14 @@ Version File | images
 VERSION_NODEJS | `etable/node`
 VERSION_PHP_72 | `etable/php7.2` , `etable/php7.2-dev`
 VERSION_PHP_708 | `etable/php7.0.8`
+
+
+# Local Testing
+For local testing you can use the `docker-compose.yml` to build the php images having fpm. 
+
+For nodejs use the following command:
+
+```
+docker build -f dockerfiles/nodejs/Dockerfile -t etable/node
+docker run -ti etable/node /bin/bash
+```
