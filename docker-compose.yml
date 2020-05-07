@@ -48,6 +48,13 @@ services:
     volumes: 
       - "./www:/var/www/html"
     
+  php708dev:
+    build:
+      context: .
+      dockerfile: dockerfiles/7.0.8/Dockerfile
+    image: etable/php7.0.8-dev
+    volumes: 
+      - "./www:/var/www/html"
 
   nginx:
     image: nginx:alpine
@@ -55,10 +62,12 @@ services:
       - '7880:7880'
       - '7881:7881'
       - '7882:7882'
+      - '7883:7883'
     links:
       - php72
       - php72dev
       - php708
+      - php708dev
     volumes:
       - "./dist/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./www:/var/www/html"
