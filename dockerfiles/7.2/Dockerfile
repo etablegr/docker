@@ -8,6 +8,7 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
     FPM_CONF_DIR="/usr/local/etc/php-fpm.d"
 
 RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev &&\
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv &&\
     apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\    
     docker-php-ext-install bcmath &&\
     docker-php-ext-install opcache && \
@@ -29,6 +30,8 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     echo "Configuring php" &&\
     touch ${PHP_SETTINGS} &&\
     rm -rf /var/cache/apk/*
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
 # For faster Re-Builds
 
