@@ -35,6 +35,10 @@ Variable | Description
       VERSION=$(date +"%Y%m%d%H%M%S");
       # Look on documentation bellow for ^VERSION_FILE^ 
       echo $VERSION > ^VERSION_FILE^
+      
+      #optionally if you have done a feature branch
+      git commit -m "Version Bump" ^VERSION_FILE^
+      git flow feature finish ^FEATURE_BRANCH^
 
       git flow release start $VERSION
       git flow release finish $VERSION
