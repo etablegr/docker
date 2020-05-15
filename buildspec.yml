@@ -17,4 +17,5 @@ phases:
       - docker push etable/php7.2
       - docker push etable/php7.2-dev
       - docker push etable/php7.0.8
+      - docker push etable/php7.0.8-dev
       - docker push etable/nodejs
