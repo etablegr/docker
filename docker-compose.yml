@@ -51,8 +51,10 @@ services:
   php708dev:
     build:
       context: .
-      dockerfile: dockerfiles/7.0.8/Dockerfile
+      dockerfile: dockerfiles/7.0.8/Dockerfile_develop
     image: etable/php7.0.8-dev
+    links:
+      - php708
     volumes: 
       - "./www:/var/www/html"
 

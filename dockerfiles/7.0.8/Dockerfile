@@ -71,5 +71,3 @@ RUN echo "Configure php-ini" \
     && echo "post_max_size=32M" >> ${PHP_INI}
     
 WORKDIR /var/www
-
-ENTRYPOINT php-fpm
