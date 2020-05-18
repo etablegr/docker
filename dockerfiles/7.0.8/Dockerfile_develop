@@ -1,0 +1,9 @@
+FROM etable/php7.0.8
+
+RUN echo "Installing composer \n" &&\
+    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
+    php /tmp/composer-setup.php --install-dir=/bin --filename=composer &&\
+    rm -rf /tmp/cpmposer-setup.php &&\
+    chmod +x /bin/composer
+
+
