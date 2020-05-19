@@ -1,0 +1,17 @@
+FROM etable/php7.0.8
+
+RUN echo "Installing composer \n" &&\
+    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
+    php /tmp/composer-setup.php --install-dir=/bin --filename=composer &&\
+    rm -rf /tmp/cpmposer-setup.php &&\
+    chmod +x /bin/composer
+
+COPY ./entrypoint/develop_entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
+    chown root:root /usr/local/bin/entrypoint.sh &&\
+    chmod +x /usr/local/bin/entrypoint.sh &&\
+    usermod --shell /bin/bash www-data
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["php-fpm"]
