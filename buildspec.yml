@@ -14,10 +14,9 @@ phases:
      - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_708) -t etable/php7.2-dev:latest .
      - docker build -f ./dockerfiles/nodejs/Dockerfile -t etable/nodejs:$(cat VERSION_NODEJS) -t etable/nodejs:latest .
      - bash tests/test_composer.sh
-  post_build:
-    commands:
-      - docker push etable/php7.2
-      - docker push etable/php7.2-dev
-      - docker push etable/php7.0.8
-      - docker push etable/php7.0.8-dev
-      - docker push etable/nodejs
+     - docker push etable/php7.2
+     - docker push etable/php7.2-dev
+     - docker push etable/php7.0.8
+     - docker push etable/php7.0.8-dev
+     - docker push etable/nodejs
+

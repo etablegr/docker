@@ -2,7 +2,7 @@
 
 echo "Testing whether composer exists"
 
-declare -a images=( 'etable/php7.2-dev' 'etable/php7.2-dev' 'etable/php7.0.8' )
+declare -a images=( 'etable/php7.2-dev' 'etable/php7.2' 'etable/php7.0.8-dev' )
 
 for image in "${images[@]}"; do
  container_name="test_composer_"$(echo $image | tr \/ _ )
