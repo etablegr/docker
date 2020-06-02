@@ -2,19 +2,16 @@
 
 WEB_USER="www-data"
 
-USER_ID=$(id -u ${WEB_USER})
-GROUP_ID=$(id -g ${WEB_USER})
+echo $DOCKER_UID $DOCKER_GID
+whoami
 
 echo "Setting the correct user and group id for shell use"
-if [ ${DOCKER_UID} != ${USER_ID} ]; then
-  echo "Change Docker user id"
-  usermod -u ${DOCKER_UID} ${WEB_USER}
-fi
 
-if [ ${DOCKER_GID} != ${GROUP_ID} ]; then
-  echo "Change Docker group id"
-  groupmod -g ${DOCKER_GID} ${WEB_USER}
-fi
+echo "Change Docker user id"
+usermod -u ${DOCKER_UID} ${WEB_USER}
+
+echo "Change Docker group id"
+groupmod -g ${DOCKER_GID} ${WEB_USER}
 
 CURRENT_UID=$(id -u ${WEB_USER})
 CURRENT_GID=$(id -g ${WEB_USER})
@@ -41,9 +38,6 @@ fi
 
 echo "Fixing execution permissions"
 find /var/www/html -iname "*.php" | xargs chmod 777
-
-# echo "Running Composer"
-
 
 
 echo "Launch application"
