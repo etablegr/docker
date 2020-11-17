@@ -9,7 +9,8 @@ ENV DOCKER_UID=1000 \
     XDEBUG_HOST="" \
     XDEBUG_IDE_KEY="" \
     XDEBUG_PORT=9000 \
-    XDEBUG_DBGP=FALSE
+    XDEBUG_DBGP=FALSE \
+    COMPOSER_MEMORY_LIMIT=-1
 
 
 RUN echo "Installing Development Dpendencies \n" &&\
