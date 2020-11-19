@@ -1,5 +1,8 @@
 FROM etable/php7.0.8
 
+ENV DOCKER_UID=1000 \
+    DOCKER_GID=1000
+
 RUN echo "Installing composer \n" &&\
     php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
     php /tmp/composer-setup.php --install-dir=/bin --filename=composer &&\
