@@ -21,5 +21,6 @@ phases:
      - docker push etable/php7.0.8
      - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php708
      - docker push etable/php7.0.8-dev
+     - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs
      - docker push etable/nodejs
 
