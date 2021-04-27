@@ -15,13 +15,17 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     docker-php-ext-install pdo pdo_pgsql pgsql && \
     docker-php-ext-install sockets &&\
     docker-php-ext-install intl && \
+    docker-php-ext-configure gd \
+        --with-png-dir=/usr/lib/ \
+        --with-jpeg-dir=/usr/lib/ \
+        --with-gd &&\
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install curl && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install intl &&\
     docker-php-ext-install pcntl &&\
-    docker-php-ext-install zip &&\
+    docker-php-ext-install zip --with-libzip &&\
     docker-php-ext-install xml &&\
     docker-php-ext-install simplexml &&\
     pecl install memcached &&\
