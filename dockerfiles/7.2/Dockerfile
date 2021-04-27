@@ -25,7 +25,7 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     docker-php-ext-install mbstring && \
     docker-php-ext-install intl &&\
     docker-php-ext-install pcntl &&\
-    docker-php-ext-install zip --with-libzip &&\
+    docker-php-ext-install zip &&\
     docker-php-ext-install xml &&\
     docker-php-ext-install simplexml &&\
     pecl install memcached &&\
