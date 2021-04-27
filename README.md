@@ -20,6 +20,8 @@ Variable | Default Value | Purpoce
 `XDEBUG_IDE_KEY` | N/A | The IDE Key.
 `XDEBUG_DBGP` | Whether the GBGP protocol will be used or not
 
+> Note: XDEBUG support is available only for php 7.2
+
 ## Codebuild Enviromental Variables
 
 Variable | Description
