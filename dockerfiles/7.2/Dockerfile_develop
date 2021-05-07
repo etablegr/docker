@@ -21,10 +21,9 @@ RUN echo "Installing Development Dpendencies \n" &&\
     pecl install xdebug  &&\
     docker-php-ext-enable xdebug &&\
     echo "Configuring Xdebug \n" &&\
-    echo "xdebug.remote_enable=1" >> ${XDEBUG_CONF_FILE} &&\
+    echo "xdebug.mode = debug,develop" >> ${XDEBUG_CONF_FILE} &&\
     echo "xdebug.max_nesting_level = 1000" >> ${XDEBUG_CONF_FILE} &&\
-    echo "xdebug.remote_mode=req" >> ${XDEBUG_CONF_FILE} &&\
-    echo "xdebug.remote_log=xdebug.log" >> ${XDEBUG_CONF_FILE} &&\
+    echo "xdebug.log = xdebug.log" >> ${XDEBUG_CONF_FILE} &&\
     cp ${XDEBUG_CONF_FILE} ${XDEBUG_CONF_FILE}.orig &&\
     apk del build-dependencies &&\
     rm -rf /var/cache/apk/*
