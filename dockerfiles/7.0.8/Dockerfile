@@ -68,6 +68,6 @@ RUN echo "Configure php-ini" \
     && echo "max_input_vars = 3000" >> ${PHP_INI} \
     && echo "request_terminate_timeout = 300" >> ${PHP_INI} \
     && echo "upload_max_filesize = 32M" >> $PHP_INI \
-    && echo "post_max_size=32M" >> ${PHP_INI}
+    && echo "post_max_size = 32M" >> ${PHP_INI}
     
 WORKDIR /var/www
