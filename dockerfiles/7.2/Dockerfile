@@ -1,6 +1,6 @@
 FROM php:7.2-fpm-alpine
 
-LABEL "com.example.vendor"="etable"
+LABEL "com.example.vendor"="etable.gr"
 LABEL org.opencontainers.image.authors="Dimitrios Desyllas <d.desyllas@e-table.gr> <pcmagas@disroot.org>, Emmanuel Zoutas <ezoutas@e-table.gr> <emmanuel@zoutas.gr>"
 
 ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
@@ -9,7 +9,7 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
 
 RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev &&\
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv &&\
-    apk add --update --virtual build-dependencies build-base gcc wget make autoconf &&\
+    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\
     docker-php-ext-install bcmath &&\
     docker-php-ext-install opcache && \
     docker-php-ext-install pdo pdo_pgsql pgsql && \
