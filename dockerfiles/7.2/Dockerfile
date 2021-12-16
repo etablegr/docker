@@ -1,7 +1,7 @@
 FROM php:7.2-fpm-alpine
 
-LABEL "com.example.vendor"="etable.gr"
-LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"
+LABEL "com.example.vendor"="etable"
+LABEL org.opencontainers.image.authors="Dimitrios Desyllas <d.desyllas@e-table.gr> <pcmagas@disroot.org>, Emmanuel Zoutas <ezoutas@e-table.gr> <emmanuel@zoutas.gr>"
 
 ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
     PHP_SETTINGS="$PHP_INI_DIR/php.ini"\
@@ -9,7 +9,7 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
 
 RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev &&\
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv &&\
-    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\    
+    apk add --update --virtual build-dependencies build-base gcc wget make autoconf &&\
     docker-php-ext-install bcmath &&\
     docker-php-ext-install opcache && \
     docker-php-ext-install pdo pdo_pgsql pgsql && \
@@ -25,7 +25,8 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
     docker-php-ext-install mbstring && \
     docker-php-ext-install intl &&\
     docker-php-ext-install pcntl &&\
-    docker-php-ext-install zip --with-libzip &&\
+  	docker-php-ext-configure zip --with-libzip && \
+    docker-php-ext-install zip &&\
     docker-php-ext-install xml &&\
     docker-php-ext-install simplexml &&\
     pecl install memcached &&\
@@ -38,7 +39,6 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
 # For faster Re-Builds
-
 RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/max_execution_time = .*/max_execution_time = 45/" ${PHP_SETTINGS} &&\
     sed -i "s/upload_max_filesize = .*/upload_max_filesize = 20M/" ${PHP_SETTINGS} &&\
@@ -50,6 +50,11 @@ RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/expose_php = .*/expose_php = Off/" ${PHP_SETTINGS} &&\
     sed -i "s/;date.timezone =/date.timezone = \"Europe\/Athens\"/" ${PHP_SETTINGS} &&\
     sed -i "s/memory_limit = .*/memory_limit = 256M/" ${PHP_SETTINGS}
+
+RUN apk add --update --virtual build-dependencies build-base gcc libgomp imagemagick imagemagick-dev libtool make autoconf &&\
+    pecl install imagick &&\
+    docker-php-ext-enable imagick &&\
+    rm -rf /var/cache/apk/*
 
 RUN echo "Installing composer \n" &&\
     php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
