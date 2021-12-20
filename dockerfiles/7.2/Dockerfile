@@ -7,9 +7,9 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
     PHP_SETTINGS="$PHP_INI_DIR/php.ini"\
     FPM_CONF_DIR="/usr/local/etc/php-fpm.d"
 
-RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev &&\
+RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev libgomp imagemagick imagemagick-dev &&\
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv &&\
-    apk add --update --virtual build-dependencies build-base gcc wget autoconf &&\
+    apk add --update --virtual build-dependencies build-base gcc wget autoconf libtool make autoconf &&\
     docker-php-ext-install bcmath &&\
     docker-php-ext-install opcache && \
     docker-php-ext-install pdo pdo_pgsql pgsql && \
@@ -20,6 +20,8 @@ RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxm
         --with-jpeg-dir=/usr/lib/ \
         --with-gd &&\
     docker-php-ext-install gd && \
+    pecl install imagick &&\
+    docker-php-ext-enable imagick &&\
     docker-php-ext-install soap && \
     docker-php-ext-install curl && \
     docker-php-ext-install mbstring && \
@@ -50,11 +52,6 @@ RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/expose_php = .*/expose_php = Off/" ${PHP_SETTINGS} &&\
     sed -i "s/;date.timezone =/date.timezone = \"Europe\/Athens\"/" ${PHP_SETTINGS} &&\
     sed -i "s/memory_limit = .*/memory_limit = 256M/" ${PHP_SETTINGS}
-
-RUN apk add --update --virtual build-dependencies build-base gcc libgomp imagemagick imagemagick-dev libtool make autoconf &&\
-    pecl install imagick &&\
-    docker-php-ext-enable imagick &&\
-    rm -rf /var/cache/apk/*
 
 RUN echo "Installing composer \n" &&\
     php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
