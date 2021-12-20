@@ -26,7 +26,7 @@ if [ -z ${XDEBUG_HOST} ]; then
 fi
 
 echo "xdebug.remote_host=${XDEBUG_HOST}" >>${XDEBUG_CONF_FILE}
-echo "xdebug.repomote_port=${XDEBUG_PORT}" >>${XDEBUG_CONF_FILE}
+echo "xdebug.remote_port=${XDEBUG_PORT}" >>${XDEBUG_CONF_FILE}
 
 if [ XDEBUG_DBGP = TRUE ]; then
   echo "xdebug.remote.handler=dbgp" >>${XDEBUG_CONF_FILE}
