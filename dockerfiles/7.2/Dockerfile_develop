@@ -25,6 +25,7 @@ RUN echo "Installing Development Dpendencies \n" &&\
     echo "xdebug.max_nesting_level = 1000" >> ${XDEBUG_CONF_FILE} &&\
     echo "xdebug.log = xdebug.log" >> ${XDEBUG_CONF_FILE} &&\
     cp ${XDEBUG_CONF_FILE} ${XDEBUG_CONF_FILE}.orig &&\
+    apk add --no-cache postgresql-client &&\
     apk del build-dependencies &&\
     rm -rf /var/cache/apk/*
 
@@ -35,6 +36,7 @@ RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     chown root:root /usr/local/bin/entrypoint.sh &&\
     chmod +x /usr/local/bin/entrypoint.sh &&\
     usermod --shell /bin/bash www-data
+
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
