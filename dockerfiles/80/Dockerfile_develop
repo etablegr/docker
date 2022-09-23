@@ -1,4 +1,4 @@
-FROM etable/php80
+FROM etable/php8.0
 
 LABEL "com.example.vendor"="etable.gr"
 LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"

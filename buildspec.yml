@@ -18,7 +18,7 @@ phases:
      - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_72) -t etable/php7.2-dev:latest .
      
      # PHP80
-     - docker build -f ./dockerfiles/80/Dockerfile -t etable/php8.0:$(cat VERSION_PHP_80) -t etable/php80:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:$(cat VERSION_PHP_80) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:latest .
+     - docker build -f ./dockerfiles/80/Dockerfile -t etable/php8.0:$(cat VERSION_PHP_80) -t etable/php8.0:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:$(cat VERSION_PHP_80) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:latest .
      - docker build -f ./dockerfiles/80/Dockerfile_develop -t etable/php8.0-dev:$(cat VERSION_PHP_80) -t etable/php8.0-dev:latest .
 
      # Nodejs
