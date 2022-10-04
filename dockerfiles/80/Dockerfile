@@ -43,7 +43,6 @@ RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/error_reporting = .*/error_reporting = -1 /" ${PHP_SETTINGS} &&\
     sed -i "s/display_errors = .*/display_errors = On/" ${PHP_SETTINGS} &&\
     sed -i "s/cgi.fix_pathinfo = .*/cgi.fix_pathinfo = 1/" ${PHP_SETTINGS} &&\
-    sed -i "s/allow_url_include = .*/allow_url_include = On/" ${PHP_SETTINGS} &&\
     sed -i "s/expose_php = .*/expose_php = Off/" ${PHP_SETTINGS} &&\
     sed -i "s/;date.timezone =/date.timezone = \"Europe\/Athens\"/" ${PHP_SETTINGS} &&\
     sed -i "s/memory_limit = .*/memory_limit = 256M/" ${PHP_SETTINGS}
