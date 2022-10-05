@@ -45,6 +45,11 @@ phases:
       - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80
       - docker push etable/php8.0-dev
 
+      # Pushing php81
+      - docker push etable/php8.1
+      - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php81
+      - docker push etable/php8.1-dev
+
       # Pushing Nodejs
       - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs
       - docker push etable/nodejs
