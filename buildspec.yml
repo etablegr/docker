@@ -23,7 +23,7 @@ phases:
 
       #php 81
       - docker build -f ./dockerfiles/81/Dockerfile -t etable/php8.1:$(cat VERSION_PHP_81) -t etable/php8.1:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php81:$(cat VERSION_PHP_81) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php81:latest .
-      - docker build -f ./dockerfiles/81/Dockerfile_develop -t etable/php8.1-dev:$(cat VERSION_PHP_81) -t etable/php8.1-dev:latest 
+      - docker build -f ./dockerfiles/81/Dockerfile_develop -t etable/php8.1-dev:$(cat VERSION_PHP_81) -t etable/php8.1-dev:latest .
 
       # Nodejs
       - docker build -f ./dockerfiles/nodejs/Dockerfile -t etable/nodejs:$(cat VERSION_NODEJS) -t etable/nodejs:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs:$(cat VERSION_NODEJS) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs:latest .
