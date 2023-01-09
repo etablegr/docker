@@ -15,13 +15,14 @@ phases:
       
       # PHP 72
       - docker build -f ./dockerfiles/7.2/Dockerfile -t etable/php7.2:$(cat VERSION_PHP_72) -t etable/php7.2:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:$(cat VERSION_PHP_72) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:latest .
-      - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_72) -t etable/php7.2-dev:latest .
+      # - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_72) -t etable/php7.2-dev:latest .
       
       # PHP80
       - docker build -f ./dockerfiles/80/Dockerfile -t etable/php8.0:$(cat VERSION_PHP_80) -t etable/php8.0:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:$(cat VERSION_PHP_80) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:latest .
       - docker build -f ./dockerfiles/80/Dockerfile_develop -t etable/php8.0-dev:$(cat VERSION_PHP_80) -t etable/php8.0-dev:latest .
 
       #php 81
+      - docker pull php:8.1-fpm-alpine
       - docker build -f ./dockerfiles/81/Dockerfile -t etable/php8.1:$(cat VERSION_PHP_81) -t etable/php8.1:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php81:$(cat VERSION_PHP_81) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php81:latest .
       - docker build -f ./dockerfiles/81/Dockerfile_develop -t etable/php8.1-dev:$(cat VERSION_PHP_81) -t etable/php8.1-dev:latest .
 
