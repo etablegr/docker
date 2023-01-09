@@ -33,9 +33,9 @@ phases:
       # - docker push etable/php7.0.8-dev
 
       # Pushing php80
-      - docker push etable/php8.0
-      - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80
-      - docker push etable/php8.0-dev
+      # - docker push etable/php8.0
+      # - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80
+      # - docker push etable/php8.0-dev
 
       # Pushing php81
       - docker push etable/php8.1
