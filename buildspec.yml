@@ -10,13 +10,13 @@ phases:
   build:
     commands:   
       # PHP 7.0.8
-      # - docker build -f ./dockerfiles/7.0.8/Dockerfile -t etable/php7.0.8:$(cat VERSION_PHP_708) -t etable/php7.0.8:latest .
-      # - docker build -f ./dockerfiles/7.0.8/Dockerfile_develop -t etable/php7.0.8-dev:$(cat VERSION_PHP_708) -t etable/php7.0.8-dev:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php708:$(cat VERSION_PHP_708) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php708:latest .
+      - docker build -f ./dockerfiles/7.0.8/Dockerfile -t etable/php7.0.8:$(cat VERSION_PHP_708) -t etable/php7.0.8:latest .
+      - docker build -f ./dockerfiles/7.0.8/Dockerfile_develop -t etable/php7.0.8-dev:$(cat VERSION_PHP_708) -t etable/php7.0.8-dev:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php708:$(cat VERSION_PHP_708) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php708:latest .
       
            
       # PHP80
-      # - docker build -f ./dockerfiles/80/Dockerfile -t etable/php8.0:$(cat VERSION_PHP_80) -t etable/php8.0:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:$(cat VERSION_PHP_80) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:latest .
-      # - docker build -f ./dockerfiles/80/Dockerfile_develop -t etable/php8.0-dev:$(cat VERSION_PHP_80) -t etable/php8.0-dev:latest .
+      - docker build -f ./dockerfiles/80/Dockerfile -t etable/php8.0:$(cat VERSION_PHP_80) -t etable/php8.0:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:$(cat VERSION_PHP_80) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php80:latest .
+      - docker build -f ./dockerfiles/80/Dockerfile_develop -t etable/php8.0-dev:$(cat VERSION_PHP_80) -t etable/php8.0-dev:latest .
 
       #php 81
       - docker pull php:8.1-fpm-alpine
