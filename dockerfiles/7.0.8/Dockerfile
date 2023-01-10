@@ -1,8 +1,8 @@
 # Forked and modified from https://hub.docker.com/r/supergramm/phpfpm-7.0.8/dockerfile
 FROM php:7.0.8-fpm
 
-MAINTAINER supergramm/phpfpm7
-MAINTAINER Desyllas Dimitrios <d.desyllas@e-table.gr><pcmagas@disroot.org>
+LABEL "com.example.vendor"="etable.gr"
+LABEL maintainer="Desyllas Dimitrios <d.desyllas@e-table.gr> <pcmagas@disroot.org>"
 
 ENV PHP_INI="/usr/local/etc/php/php.ini" \
     FPM_CONF="/usr/local/etc/php-fpm.d/www.conf"
@@ -24,7 +24,7 @@ RUN buildDeps=" \
         unzip \
         "; \
         set -x \
-    && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y --force-yes $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
    && pecl install redis \
     && docker-php-ext-install \
         mcrypt \
