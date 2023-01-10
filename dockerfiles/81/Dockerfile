@@ -7,7 +7,7 @@ ENV PHP_CONF_DIR="$PHP_INI_DIR/conf.d" \
     PHP_SETTINGS="$PHP_INI_DIR/php.ini"\
     FPM_CONF_DIR="/usr/local/etc/php-fpm.d"
 
-RUN apk add --update libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev libgomp imagemagick imagemagick-dev oniguruma oniguruma-dev &&\
+RUN apk add --update icu-data-full libzip-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev libxml2-dev icu-dev postgresql-dev curl-dev libmemcached-dev libgomp imagemagick imagemagick-dev oniguruma oniguruma-dev &&\
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv &&\
     apk add --update --virtual build-dependencies build-base gcc wget autoconf libtool make autoconf &&\
     docker-php-ext-install bcmath &&\
