@@ -45,7 +45,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/cgi.fix_pathinfo = .*/cgi.fix_pathinfo = 1/" ${PHP_SETTINGS} &&\
     sed -i "s/expose_php = .*/expose_php = Off/" ${PHP_SETTINGS} &&\
     sed -i "s/;date.timezone =/date.timezone = \"Europe\/Athens\"/" ${PHP_SETTINGS} &&\
-    sed -i "s/memory_limit = .*/memory_limit = 256M/" ${PHP_SETTINGS}
+    sed -i "s/memory_limit = .*/memory_limit = 1024M/" ${PHP_SETTINGS}
 
 RUN echo "Installing composer \n" &&\
     php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
