@@ -25,7 +25,6 @@ phases:
 
       # Nodejs
       - docker build -f ./dockerfiles/nodejs/Dockerfile -t etable/nodejs:$(cat VERSION_NODEJS) -t etable/nodejs:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs:$(cat VERSION_NODEJS) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/nodejs:latest .
-      - bash tests/test_composer.sh
 
       # Pushing php81
       - docker push etable/php8.1
@@ -40,7 +39,7 @@ phases:
       - docker build -f ./dockerfiles/7.2/Dockerfile -t etable/php7.2:$(cat VERSION_PHP_72) -t etable/php7.2:latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:$(cat VERSION_PHP_72) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:latest .
       - docker build -f ./dockerfiles/7.2/Dockerfile_develop -t etable/php7.2-dev:$(cat VERSION_PHP_72) -t etable/php7.2-dev:latest .
       - docker build -f ./dockerfiles/7.2/Dockerfile_cron -t etable/php7.2:cron_$(cat VERSION_PHP_72) -t etable/php7.2:cron_latest -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:cron_$(cat VERSION_PHP_72) -t 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72:cron_latest .
-
+      - bash tests/test_composer.sh
 
 
       # Pushing PHP 72
