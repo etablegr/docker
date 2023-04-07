@@ -32,6 +32,15 @@ services:
     volumes: 
       - "./www:/var/www/html"
   
+  php72_cron:
+    build:
+      context: .
+      dockerfile: dockerfiles/7.2/Dockerfile_cron
+    image: etable/php7.2-cron
+    command: ["php","-r","\"echo 'Hello'.PHP_EOL;\""]
+    volumes: 
+      - "./www:/var/www/html"
+
   php72dev:
     build:
       context: .
