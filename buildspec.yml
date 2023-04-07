@@ -43,7 +43,7 @@ phases:
 
 
       # Pushing PHP 72
-      - docker push etable/php7.2
-      - docker push 251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72
+      - docker image push --all-tags  etable/php7.2
+      - docker image push --all-tags  251998751921.dkr.ecr.eu-central-1.amazonaws.com/php72
       - docker push etable/php7.2-dev
 
