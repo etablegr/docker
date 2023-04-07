@@ -53,16 +53,12 @@ RUN mv "$PHP_INI_DIR/php.ini-production" ${PHP_SETTINGS} &&\
     sed -i "s/;date.timezone =/date.timezone = \"Europe\/Athens\"/" ${PHP_SETTINGS} &&\
     sed -i "s/memory_limit = .*/memory_limit = 1024M/" ${PHP_SETTINGS}
 
-RUN echo "Installing composer \n" &&\
-    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" &&\
-    php /tmp/composer-setup.php --install-dir=/bin --filename=composer &&\
-    rm -rf /tmp/cpmposer-setup.php &&\
-    chmod +x /bin/composer
-
 COPY ./entrypoint/entrypoint_cron.sh /usr/local/bin/entrypoint.sh
 
 RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     chown root:root /usr/local/bin/entrypoint.sh &&\
     chmod +x /usr/local/bin/entrypoint.sh
+
+USER www-data
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
